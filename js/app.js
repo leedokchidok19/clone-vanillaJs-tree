@@ -12,11 +12,14 @@ class App {
         //값이 1 보다 크면 캔버스의 사이즈와 비율을 2배, 1이하면 1배 설정
         this.pixelRatio = window.devicePixelRatio > 1 ? 2 : 1;
 
+        // resize 이벤트 추가 
         window.addEventListener('resize', this.resize.bind(this), false);
+        // click 이벤트 추가
+        window.addEventListener('click', this.click.bind(this), false);
         this.resize();
 
         // 화면 가운데에 나무 생성
-        new Tree(this.ctx, this.stageWidth / 2, this.stageHeight);
+        //new Tree(this.ctx, this.stageWidth / 2, this.stageHeight);
     }
 
     //윈도우 창 크기 변경되면 캔버스 크기도 변경
@@ -33,6 +36,13 @@ class App {
         // 리사이즈시 캔버스를 비워줌
         this.ctx.clearRect(0, 0, this.stageWidth, this.stageHeight);
     }
+
+    // click 함수 추가
+    click(event) {
+        const { clientX } = event;
+        new Tree(this.ctx, clientX, this.stageHeight);
+    }
+
 }
 
 window.onload = () => {
